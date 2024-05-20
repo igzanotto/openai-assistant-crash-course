@@ -1,7 +1,9 @@
 import OpenAI from "openai";
 
 export async function GET() {
-  const openai = new OpenAI();
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
 
   try {
     const assistant = await openai.beta.assistants.create({
@@ -12,8 +14,8 @@ export async function GET() {
       If you're not 100% sure of the answer, you can say "I don't know".
         `,
       name: "Mini Stock Analyst",
-      tools: [{ type: "retrieval" }],
-      model: "gpt-4-1106-preview",
+      // tools: [{ type: "retrieval" }],
+      model: "gpt-4o",
     });
 
     console.log(assistant);
